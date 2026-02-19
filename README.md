@@ -27,15 +27,15 @@ Perfect for **content creators**, **educators**, and **businesses** who need to 
 
 ---
 
-## 🔎 Complete Data Extraction
+## 🔍 Complete Data Extraction
 
 ### 📹 **Video Intelligence**
-- **Metadata**: ID, title, description, thumbnails, creation date, duration, quality
+- **Metadata**: ID, title, **description**, thumbnails, creation date, duration, quality
 - **Engagement**: Views, reactions, comments count and full comment threads
 - **Technical**: File format, direct download URLs, sharing links
 - **Creator**: Owner information, avatars, profile data
 
-### 📝 **Transcript Processing**
+### 📄 **Transcript Processing**
 - **Multiple Formats**: SRT, VTT, TXT, XML exports with precise timestamps
 - **Clean Text**: Formatted, readable content ready for analysis
 - **Search Ready**: Full-text search capabilities across your library
@@ -86,7 +86,7 @@ Process individual videos, entire folders, or mixed content:
 - **Use Case**: Full video archiving and offline access
 - **Note**: ✅ **Works even when owner has disabled downloads** in video settings
 
-#### 📝 `downloadTranscript` (Boolean)
+#### 📄 `downloadTranscript` (Boolean)
 - **Default**: `false`
 - **Integration**: Ready for video players and analysis tools
 
@@ -98,7 +98,7 @@ Process individual videos, entire folders, or mixed content:
   - `"txt"`: Clean text without timestamps
   - `"xml"`: Full metadata structure
 
-### 🔐 **Account Videos Options** (Only when `includeAccountVideos` is enabled)
+### 📅 **Account Videos Options** (Only when `includeAccountVideos` is enabled)
 
 These parameters only work when scraping your own Loom account videos. They have no effect when processing individual video URLs or public folders.
 
@@ -123,24 +123,27 @@ These parameters only work when scraping your own Loom account videos. They have
 
 ---
 
-## ⚠️ Important: Memory Requirements for Video Downloads
+## ⚠️ Smart Memory Management for Video Downloads
 
-When `downloadVideo` is enabled, the Actor requires significantly more memory. **Insufficient memory will cause failures** with OOM (Out Of Memory) errors.
+When `downloadVideo` is enabled, this Actor uses **intelligent resource allocation** powered by our specialized [Universal File Downloader](https://apify.com/dz_omar/universal-file-downloader) to optimize memory usage and prevent failures. The Actor automatically analyzes each video's file size and dynamically allocates the optimal amount of memory needed for successful downloads.
 
-### ✅ Recommended Memory Settings:
+### ✅ **How It Works**
 
-| Use Case | Memory Required |
-|----------|----------------|
-| Metadata/transcripts only | 512MB-1024MB |
-| 1-5 video downloads | 1024MB |
-| Large folders/bulk downloads | 2048MB or more |
+**Dynamic Resource Calculation**: The Actor examines each video file before downloading and calculates the exact memory requirements based on file size, ensuring efficient resource usage without waste.
 
-Set memory in your run configuration: 2 GB or more
+**Automatic Memory Scaling**: Memory allocation automatically scales from 128MB for small videos up to 32GB for very large files, preventing both resource waste and Out-Of-Memory errors.
 
-### 💡 Performance Tips:
-- Process videos sequentially, not in parallel
-- Split large folders into smaller batches
-- Monitor usage from the Apify Console
+**Intelligent Timeout Management**: Download timeouts are calculated based on file size and estimated connection speed, ensuring downloads complete successfully without unnecessary waiting.
+
+**Enterprise-Grade Download Engine**: Powered by our [Universal File Downloader](https://apify.com/dz_omar/universal-file-downloader) Actor, which provides advanced proxy support, retry mechanisms, and streaming technology for reliable downloads of any size.
+
+### 💡 **Benefits for Users**
+
+- **No Manual Configuration**: You don't need to guess or manually set memory requirements
+- **Prevents Failures**: Eliminates OOM crashes that could interrupt your downloads
+- **Cost Efficient**: Optimizes resource usage to minimize unnecessary costs
+- **Handles Any Size**: From small clips to multi-gigabyte recordings, all processed reliably
+- **Batch Processing**: Each video in a folder gets its own optimized resource allocation
 
 ### 📖 **[Learn more about Apify usage and resources](https://docs.apify.com/platform/actors/running/usage-and-resources)**
 ---
@@ -219,16 +222,6 @@ The Actor supports **scraping your private Loom videos** - perfect for backing u
 
 ---
 
-
-Process:
-1. Navigate to loom.com and log in
-2. Use extension to export cookies as JSON
-3. Paste into `customCookies` parameter
-
-**Note**: Without authentication, only public content can be accessed.
-
----
-
 ## 📊 Sample Output Structure
 
 ![Sample Output](https://raw.githubusercontent.com/DZ-ABDLHAKIM/loom-scrape-pro/refs/heads/main/Sample_Output.png)
@@ -238,10 +231,11 @@ Process:
   "video": {
     "id": "388fe9c5db854403bceefe52ea85dede",
     "title": "How to Use YouTube Scraper Effectively 🚀",
+    "description": "In this tutorial, I'll walk you through the complete process of using the YouTube Scraper effectively. Learn how to extract video metadata, download content, and automate your YouTube data collection workflow.",
     "url": "https://www.loom.com/share/388fe9c5db854403bceefe52ea85dede",
     "thumbnails": "https://cdn.loom.com/sessions/thumbnails/...",
     "created_at": "2025-07-11T09:47:40.065Z",
-    "duration_seconds": 38.28,
+    "duration_seconds": "38s",
     "views": 0,
     "reactions": 7,
     "comments_count": 6,
@@ -249,7 +243,8 @@ Process:
     "avatars": "https://cdn.loom.com/avatars/...",
     "download": {
       "available": true,
-      "url": "https://api.apify.com/v2/key-value-stores/.../video.mp4",
+      "url": "https://api.apify.com/v2/key-value-stores/xxx/records/Video_Name?signature=abc",
+      "direct_download": "https://api.apify.com/v2/key-value-stores/xxx/records/Video_Name?signature=abc&attachment=true",
       "format": "mp4"
     }
   },
@@ -334,7 +329,7 @@ Set memory in your run configuration: 2 GB or more
 
 ---
 
-## 🔄 Advanced Features
+## 📄 Advanced Features
 
 ### **Reliability & Performance**
 - **State Management**: Auto-resume from interruption points with progress tracking
@@ -371,19 +366,40 @@ Set memory in your run configuration: 2 GB or more
 ## 🤝 Support & Resources
 
 ### **Getting Help**
-- **📧 Email**: [fridaytechnolog@gmail.com](mailto:fridaytechnolog@gmail.com)
-- **🐙 GitHub**: [DZ-ABDLHAKIM](https://github.com/DZ-ABDLHAKIM)
-- **🐦 Twitter**: [@DZ_45Omar](https://x.com/DZ_45Omar)
-- **🔧 Apify**: [dz_omar](https://apify.com/dz_omar)
+- 🌐 **Website**: [flowextractapi.com](https://flowextractapi.com)
+- 📧 **Email**: [flowextractapi@outlook.com](mailto:flowextractapi@outlook.com)
+- 🙋 **Apify Profile**: [dz_omar](https://apify.com/dz_omar?fpr=smcx63)
+- 💬 **GitHub Issues**: [FlowExtractAPI](https://github.com/FlowExtractAPI)
 
-### **Legal & Compliance**
-- **Responsible Usage**: Only scrapes publicly accessible data with proper rate limiting
-- **Terms Compliance**: Follows Loom's terms of service without bypassing security
-- **Data Protection**: Encrypted credential handling with automatic cleanup
-- **Privacy Respect**: No unauthorized data collection with transparent usage policies
+### Social Media
+
+- 💼 **LinkedIn**: [flowextract-api](https://www.linkedin.com/in/flowextract-api/)
+- 🐦 **Twitter**: [@FlowExtractAPI](https://x.com/@FlowExtractAPI)
+- 📱 **Facebook**: [flowextractapi](https://www.facebook.com/flowextractapi)
+
 
 ---
 
-**Version**: 2.x  
-**Last Updated**: July 2025  
-**Status**: Active Development
+## 🌟 Related Actors by DZ_OMAR
+
+### 🎬 Video & Media
+- **[YouTube Transcript Extractor](https://apify.com/dz_omar/youtube-transcript-metadata-extractor?fpr=smcx63)** - Extract transcripts with timestamps
+- **[YouTube Scraper Pro](https://apify.com/dz_omar/Youtube-Scraper-Pro?fpr=smcx63)** - Complete channel and playlist extraction
+- **[Zoom Scraper](https://apify.com/dz_omar/zoom-scraper?fpr=smcx63)** - Download recordings and transcripts
+- **[Loom Scraper](https://apify.com/dz_omar/loom-video-scraper?fpr=smcx63)** - Loom video and transcript extraction
+
+### 🏠 Real Estate
+- **[Idealista Scraper API](https://apify.com/dz_omar/idealista-scraper-api?fpr=smcx63)** - Spanish property data with API
+- **[Idealista Scraper](https://apify.com/dz_omar/idealista-scraper?fpr=smcx63)** - Real estate listings extractor
+
+### 🛠️ Developer Tools
+- **[Screenshot](https://apify.com/dz_omar/screenshot?fpr=smcx63)** - Fast webpage screenshots
+- **[Ultimate Screenshot](https://apify.com/dz_omar/ultimate-screenshot?fpr=smcx63)** - Advanced screenshot tool
+- **[Network Security Scanner](https://apify.com/dz_omar/network-security-scanner?fpr=smcx63)** - Security vulnerability scanner
+
+### 📱 Social Media
+- **[Facebook Ads Scraper Pro](https://apify.com/dz_omar/facebook-ads-scraper-pro?fpr=smcx63)** - Extract Facebook ads data
+
+---
+
+
