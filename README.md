@@ -77,6 +77,29 @@ Process individual videos, entire folders, or mixed content:
   ]
 }
 ```
+### ⏱️ Advanced Download Settings
+
+#### `pollMultiplier` (Number)
+- **Default**: `0.02`
+- **Range**: `0.01` – `1.0`
+- **Only applies when**: `downloadVideo: true`
+
+Loom does not return a download URL instantly — it prepares the MP4 file in the background 
+first. The scraper keeps re-signaling Loom until the URL is ready. This multiplier controls 
+the **maximum time it will wait**, calculated as:
+
+```
+max_wait = max(30s, video_duration_seconds × pollMultiplier)  [capped at 600s]
+```
+
+| Video Length | Default wait (0.02) |
+|---|---|
+| Under 25 min | 30s (minimum) |
+| 30 min | ~36s |
+| 2.5 hours | ~180s |
+
+💡 **If you see timeout errors on long videos**, increase this value (e.g. `0.05` or `0.1`).  
+💡 **For short video libraries**, keep the default.
 
 ### 📥 **Download Options**
 
@@ -85,6 +108,9 @@ Process individual videos, entire folders, or mixed content:
 - **Format**: Original MP4 quality preserved
 - **Use Case**: Full video archiving and offline access
 - **Note**: ✅ **Works even when owner has disabled downloads** in video settings
+- **How it works**: When requested, Loom prepares the MP4 asynchronously in the background — 
+  the scraper automatically re-signals Loom and polls until the URL is ready. 
+  Small videos (~2min) may take ~10s, longer videos can take up to 3 minutes or more.
 
 #### 📄 `downloadTranscript` (Boolean)
 - **Default**: `false`
@@ -357,6 +383,9 @@ Set memory in your run configuration: 2 GB or more
 - **Permissions**: Verify sharing permissions with content creator
 
 ### **Performance Issues**
+- **Download URL timeout**: If you see timeout on long videos, increase `pollMultiplier` 
+  (e.g. from `0.02` to `0.05`). Loom prepares downloads asynchronously and longer 
+  videos need more preparation time.
 - **Memory errors**: Increase memory allocation for video downloads
 - **Large folders**: Split into smaller batches
 - **Slow processing**: Check network connection and Loom server status
