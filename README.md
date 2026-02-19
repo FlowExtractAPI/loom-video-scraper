@@ -380,7 +380,7 @@ Set memory in your run configuration: 2 GB or more
 
 ---
 
-## 🌟 Related Actors by DZ_OMAR
+## 🌟 Related Actors by FlowExtractAPI
 
 ### 🎬 Video & Media
 - **[YouTube Transcript Extractor](https://apify.com/dz_omar/youtube-transcript-metadata-extractor?fpr=smcx63)** - Extract transcripts with timestamps
